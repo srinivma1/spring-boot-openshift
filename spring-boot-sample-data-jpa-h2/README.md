@@ -27,12 +27,10 @@ spring.thymeleaf.cache=false
 ```
 
 
-## concourse
-fly -t example login -c http://localhost:8080
+## Steps to run and deploy Spring boot application on openshift:
+ - First, create two files deployment.yaml and configMap.yaml under src/main/fabric8. Configmap will contain application.properties and then the deployment.yaml will define volume mounts for the same.
+ - Add fabric8 io maven plugin in pom.xml as shown in this repo.
+ - Second, run mvn clean install -Dfabric8.mode=openshift. Doing this will create an OpenShift BuildConfig and kick off a binary s2i build!
+ - Third, run mvn fabric8:deploy -Dfabric8.mode=openshift. Maven plugin will create the appropriate OpenShift DeploymentConfig and use the associated OpenShift ImageStreams that were created from the BuildConfig.
 
-fly -t example set-pipeline --pipeline spring-boot-sample-data-jpa-h2 --config concourse-pipeline.yml
-
-## commands
-docker compose up --build(build and run)
-docker compose down --rmi all --remove-orphans
    
