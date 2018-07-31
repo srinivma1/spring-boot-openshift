@@ -1,0 +1,11 @@
+version: '3'
+services:
+    spring-boot-jpa:
+        container_name: spring-boot-jpa
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: spring-boot-jpa:latest
+        ports:
+            - "8888:8080"
+       
